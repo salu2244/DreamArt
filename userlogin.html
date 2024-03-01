@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    </head>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="container-fluid">
+          <a href="#" class="navbar-brand">
+              <span style="color:red">Dream</span>
+              <span style="color:green">Art</span>
+              <span style="color:blue">Shop</span>
+          </a>
+          <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#myMenu">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse text-center" id="myMenu">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item"><a href="/index" class="nav-link"><i class="fas fa-home"></i> Home {{is_authenticated}}</a></li>
+                  <li class="nav-item"><a href="/product_detail" class="nav-link">Product</a></li>
+                  {% if not request.user.is_authenticated %}
+                      <li class="nav-item"><a href="/aboutus" class="nav-link">About Us</a></li>
+                      <li class="nav-item"><a href="{% url 'userlogin' %}" class="nav-link">Login</a></li>
+                      <li class="nav-item"><a href="{% url 'registration' %}" class="nav-link">Signup</a></li>
+                  {% else %}
+                      <li class="nav-item"><a href="" class="nav-link">Feedback</a></li>
+                      <li class="nav-item"><a href="" class="nav-link">My Order</a></li>
+                      <li class="nav-item"><a href="/cart" class="nav-link">My Cart</a></li>
+                      <li class="nav-item dropdown">
+                          <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                             aria-haspopup="true" aria-expanded="false">
+                              <img src="{% static 'images/useravatar.png' %}" style="width:40px;height:40px;border-radius:50%" />
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                              <a class="dropdown-item" href="#">Profile</a>
+                              <a class="dropdown-item" href="#">Change Password</a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#">Logout</a>
+                          </div>
+                      </li>
+                  {% endif %}
+              </ul>
+          </div>
+      </div>
+  </nav>
+  
+    <body id="login">
+        <hr class="mt-0">
+
+<div class="row">
+  <div class="col-lg-5 m-auto">
+    <div class="card mt-5 bg-dark">
+      <div class="card-title text-center mt-3">
+         <!-- <img src="{% static '' %}" width="150" height="150">-->
+          <img src="{% static 'images/user-img.jpeg' %}" alt="Hand Image">
+          <h2 class="text-white">User Login</h2>
+      </div>
+      <div class="card-body">
+        <form method="post">
+          {% csrf_token %}
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-user fa-2x"></i>
+                </span>
+              </div>
+              <input type="text" name="username" class="form-control py-4" placeholder="Email ID">
+          </div>
+
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="fa fa-lock fa-2x"></i>
+                </span>
+              </div>
+              <input type="password" name="password" class="form-control py-4" placeholder="Password">
+          </div>
+          <input type="submit" value="Login" class="btn btn-success px-5">
+          <a href="/registration" class="float-right mt-2 text-white">Create Account <i class="fas fa-angle-double-right"></i></a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+ 
+    </body>
+</html>
